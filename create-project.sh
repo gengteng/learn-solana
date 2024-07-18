@@ -9,3 +9,5 @@ touch $1.ts
 
 echo 'npx esrun $1.ts' > run.sh
 chmod +x run.sh
+
+cp ../.env ./
