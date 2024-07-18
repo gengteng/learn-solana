@@ -3,3 +3,4 @@
 Projects:
 
 * generate-keypair
+* read-data-from-solana
