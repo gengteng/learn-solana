@@ -6,3 +6,6 @@ cd $1
 npm init -y
 npm install typescript @solana/web3.js esrun hpagent
 touch $1.ts
+
+echo 'npx esrun $1.ts' > run.sh
+chmod +x run.sh
