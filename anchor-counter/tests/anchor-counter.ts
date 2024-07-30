@@ -2,6 +2,7 @@ import * as anchor from "@coral-xyz/anchor"
 import { Program } from "@coral-xyz/anchor"
 import { expect } from "chai"
 import { AnchorCounter } from "../target/types/anchor_counter"
+import { BN } from "bn.js"
 
 describe("anchor-counter", () => {
   // Configure the client to use the local cluster.
@@ -42,5 +43,16 @@ describe("anchor-counter", () => {
   
     const account = await program.account.counter.fetch(counter.publicKey)
     expect(account.count.toNumber()).to.equal(0)
+  })
+
+  it("Set the count", async () => {
+    const number = Math.floor(Math.random() * 100);
+    const tx = await program.methods
+      .set(new BN(number))
+      .accounts({ counter: counter.publicKey, user: provider.wallet.publicKey })
+      .rpc()
+  
+    const account = await program.account.counter.fetch(counter.publicKey)
+    expect(account.count.toNumber()).to.equal(number)
   })
 })

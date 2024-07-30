@@ -29,6 +29,14 @@ pub mod anchor_counter {
         msg!("Counter decremented. Current count: {}", counter.count);
         Ok(())
     }
+
+    pub fn set(ctx: Context<Update>, count: u64) -> Result<()> {
+        let counter = &mut ctx.accounts.counter;
+        msg!("Previous counter: {}", counter.count);
+        counter.count = count;
+        msg!("Counter set to: {}", counter.count);
+        Ok(())
+    }
 }
 
 #[derive(Accounts)]
